@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      component: worker
+  template:
+    metadata:
+      labels:
+        component: worker
+    spec:
+      containers:
+        - name: worker
+          image: yasir326/multi-worker
+          env: #tells our multi-worker container how it can reach out and connect to REDIS
+            - name: REDIS_HOST 
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: '6379'  
+
