@@ -1,0 +1,21 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: test-udemy-k8s-tk-tls
+spec:
+  secretName: test-udemy-k8s-tk
+  issuerRef: 
+    name: letsencrypt-prod  
+    kind: ClusterIssuer
+  commonName: testudemyk8s.tk  
+  dnsNames:
+    - testudemyk8s.tk
+    - www.testudemyk8s.tk
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - testudemyk8s.tk
+          - www.testudemyk8s.tk     
+
